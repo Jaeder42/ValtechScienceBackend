@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { verify } from './isVerified';
 import { readFileSync, writeFileSync } from 'fs';
+import { finished } from 'stream';
 
 export const postFact = async (req: Request, res: Response) => {
   const { position, source, user, url, reason } = req.body;
@@ -13,26 +14,29 @@ export const postFact = async (req: Request, res: Response) => {
     return res.status(400).json({ message: 'Non-verified source' });
   }
 
-  let data = JSON.parse(await readFileSync('./session-data.json').toString());
-  let urlData = data[url];
+  let data = JSON.parse(
+    await readFileSync('./utils/session-data.json').toString()
+  );
+  let urlData = findData(data, url);
   if (!urlData) {
-    initPost(data, url);
+    urlData = {
+      url,
+      votes: { pro: 0, con: 0 },
+      links: {
+        pro: [],
+        con: []
+      }
+    };
+    data.push(urlData);
   }
-  data[url][position] += 1;
-  data[url].links[position].push(source);
-
-  writeFileSync('./session-data.json', JSON.stringify(data));
+  urlData.votes[position] += 1;
+  urlData.links[position].push(source);
+  console.log(JSON.stringify(data));
+  await writeFileSync('./utils/session-data.json', JSON.stringify(data));
 
   return res.json({ data });
 };
 
-export const initPost = (data: any, url: string) => {
-  data[url] = {
-    pro: 0,
-    con: 0,
-    links: {
-      pro: [],
-      con: []
-    }
-  };
+const findData = (data: any, url: string) => {
+  return data.find((d: any) => d.url === url);
 };

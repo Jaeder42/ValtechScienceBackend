@@ -5,7 +5,7 @@ import { isVerified, getShortData, getLongData, postFact } from './handlers';
 
 // Create a new express application instance
 const app: express.Application = express();
-writeFileSync('./session-data.json', readFileSync('./data.json'));
+writeFileSync('./utils/session-data.json', readFileSync('./utils/data.json'));
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
