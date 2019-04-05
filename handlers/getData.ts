@@ -13,7 +13,7 @@ export const getShortData = async (req: Request, res: Response) => {
   if(data == undefined)
     res.sendStatus(404); // Perhaps wrong to return 404 here... 
   else
-    res.send({url:url, vote: data.vote});
+    res.send({url:url, votes: data.vote});
 };
 
 export const getLongData = async (req: Request, res: Response) => {
@@ -22,7 +22,7 @@ export const getLongData = async (req: Request, res: Response) => {
   if(data == undefined)
     res.sendStatus(404); // Perhaps wrong to return 404 here... 
   else
-    res.send({url:url, vote: data.vote, links: data.links });
+    res.send({url:url, votes: data.votes, links: data.links });
 };
 
 

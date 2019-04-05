@@ -1,4 +1,4 @@
 {
-    "http://www.dn.se" : {"vote": {"pro": 21, "con": 4}, "links": ["http://www.svt.se", "http://www.sr.se"]},
-    "http://www.svd.se" : {"vote": {"pro": 42, "con": 12}, "links": ["http://www.svt.se", "http://www.sr.se"]}
+    "http://www.dn.se" : {"votes": {"pro": 21, "con": 4}, "links": { "pro": ["http://www.svt.se", "http://www.sr.se"], "con" : []} },
+    "http://www.svd.se" : {"votes": {"pro": 42, "con": 12}, "links": {"pro": [], "con": ["http://www.svt.se", "http://www.sr.se"]}}
 }
