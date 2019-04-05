@@ -1,7 +1,13 @@
 import express = require('express');
 import { readFileSync, writeFileSync } from 'fs';
 import bodyParser from 'body-parser';
-import { isVerified, getShortData, getLongData, postFact } from './handlers';
+import {
+  isVerified,
+  getShortData,
+  getLongData,
+  postFact,
+  postOp
+} from './handlers';
 
 // Create a new express application instance
 const app: express.Application = express();
@@ -19,6 +25,7 @@ app.get('/short/', getShortData);
 app.get('/long/', getLongData);
 
 app.post('/fact', postFact);
+app.post('/opinion', postOp);
 
 app.listen(3000, function() {
   console.log('Example app listening on port 3000!');

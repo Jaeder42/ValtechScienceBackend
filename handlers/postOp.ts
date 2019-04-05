@@ -1,17 +1,13 @@
 import { Request, Response } from 'express';
-import { verify } from './isVerified';
 import { readFileSync, writeFileSync } from 'fs';
 
-export const postFact = async (req: Request, res: Response) => {
+export const postOp = async (req: Request, res: Response) => {
   const { position, source, user, url, reason } = req.body;
-  const type = 'FACT';
+  const type = 'OPINION';
   if (!position || !source || !user || !url) {
     return res.status(400).json({
       message: 'position, source, user and url are required fields'
     });
-  }
-  if (!verify(source)) {
-    return res.status(400).json({ message: 'Non-verified source' });
   }
 
   let data = JSON.parse(

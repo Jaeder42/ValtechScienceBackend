@@ -4,8 +4,16 @@
     "votes": { "pro": 21, "con": 4 },
     "links": {
       "pro": [
-        { "url": "http://www.svt.se", "reason": "Om man läser här ser man.." },
-        { "url": "http://www.sr.se", "reason": "Om man läser här ser man.." }
+        {
+          "url": "http://www.svt.se",
+          "reason": "Om man läser här ser man..",
+          "type": "OPINION"
+        },
+        {
+          "url": "http://www.sr.se",
+          "reason": "Om man läser här ser man..",
+          "type": "FACT"
+        }
       ],
       "con": []
     }
@@ -16,8 +24,16 @@
     "links": {
       "pro": [],
       "con": [
-        { "url": "http://www.svt.se", "reason": "Om man läser här ser man.." },
-        { "url": "http://www.sr.se", "reason": "Om man läser här ser man.." }
+        {
+          "url": "http://www.svt.se",
+          "reason": "Om man läser här ser man..",
+          "type": "OPINION"
+        },
+        {
+          "url": "http://www.sr.se",
+          "reason": "Om man läser här ser man..",
+          "type": "OPINION"
+        }
       ]
     }
   }
