@@ -3,13 +3,18 @@ import verifiedData from '../utils/verifiedData.json';
 export const isVerified = async (req: Request, res: Response) => {
   let verified: boolean = false;
   const { url } = req.query;
-  const domain = getDomain(url);
-  if (verifiedData.trusted.includes(domain)) {
+
+  if (verify(url)) {
     verified = true;
   }
   return res.json({
     verified
   });
+};
+
+export const verify = (url: string) => {
+  const domain = getDomain(url);
+  return verifiedData.trusted.includes(domain);
 };
 
 const getDomain = (url: string) => {

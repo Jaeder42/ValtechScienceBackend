@@ -1,3 +1,4 @@
 import { isVerified } from './isVerified';
+import { postFact } from './postFact';
 
-export { isVerified };
+export { isVerified, postFact };
