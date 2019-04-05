@@ -14,7 +14,7 @@
     "typescript": "^3.4.1"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp index.html build/index.html",
     "dev": "ts-node server.ts",
     "start": "node build/server.js"
   }

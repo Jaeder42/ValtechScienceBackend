@@ -1,10 +1,74 @@
 <html>
-  <head> </head>
+  <head> 
+      <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+    <style>
+      body {background-color: #8bbaaa;
+      color: #eefb98;
+      font-family: 'Ubuntu', sans-serif;
+      padding: 40px;
+      }
+      p{
+        margin: 0;
+      }
+      h1{
+        text-align: center;
+      }
+      h2 {
+        margin: 0;
+      }
+      .content{
+        width: 200px;
+        margin: auto;
+      }
+      .card{
+        text-align: center;
+        color: #333;
+        background-color: #efefef;
+        border-radius: 10px;
+        padding: 10px 20px;
+        width: 200px;
+        margin: 20px 0px;
+
+      }
+      .code{
+        background-color: #333;
+        text-align: left;
+        padding: 10px;
+        border-radius: 10px;
+      }
+        code{
+          color:chartreuse;
+        }
+      </style>
+  </head>
   <body>
-    <h1>Welcome</h1>
-    <h2>How to use:</h2>
-    <a href="/long?url=http://www.svd.se"">/long</a> </br>
-    <a href="/short?url=http://www.svd.se"">/short</a> </br>
-    <a href="/verified?url=https://dn.se"">/verified</a> </br>
+    <div class="content">
+    <h1>Clarity API</h1>
+    <h2>Documentation:</h2>
+    <div class="card">
+    <h2>GET</h2>
+    <a href="/long?url=http://www.svd.se"">/long?url={someUrl}</a> </br>
+    <a href="/short?url=http://www.svd.se"">/short?url={someUrl}</a> </br>
+    <a href="/verified?url=https://dn.se"">/verified?url={someUrl}</a> </br>
+    </div>
+    <div class="card">
+    <h2>POST</h2>
+    <p>/opinion</p>
+    <p>/fact</p>
+    </br>
+    <p>Body</p>
+    <div class="code">
+    <code>
+        {
+          "position": "con",
+          "source": "https://truth.se",
+          "user":"Herr Gårman",
+          "url":"http://fake-news.org/fake-article",
+          "reason": "This is fake because facts"
+        }
+    </code>
+    </div>
+    </div>
+  </div>
   </body>
 </html>
