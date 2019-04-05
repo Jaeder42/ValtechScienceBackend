@@ -23,7 +23,8 @@ app.get('/short/', function(req, res) {
   const data = getData(url);
   if(data == undefined)
     res.sendStatus(404); // Perhaps wrong to return 404 here... 
-  res.send({url:url, vote: data.vote});
+  else
+    res.send({url:url, vote: data.vote});
 });
 
 // Is short/long the right naming scheme?
@@ -32,7 +33,8 @@ app.get('/long/', function(req, res) {
   const data = getData(url);
   if(data == undefined)
     res.sendStatus(404); // Perhaps wrong to return 404 here... 
-  res.send({url:url, vote: data.vote, links: data.links });
+  else
+    res.send({url:url, vote: data.vote, links: data.links });
 });
 
 app.listen(3000, function() {
