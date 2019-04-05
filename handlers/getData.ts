@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import urls from '../utils/data.json';
+import urls from '../utils/session-data.json';
 
 export const getShortData = async (req: Request, res: Response) => {
   const { url } = req.query;
