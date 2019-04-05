@@ -1,24 +1,18 @@
 import { Request, Response } from 'express';
-import { readFileSync } from 'fs';
-
-const getAllData = (url:string) => {
-  let data = readFileSync('./data.json').toString();
-  var urls = JSON.parse(data);
-  return urls[url];
-};
+import urls from '../utils/data.json';
 
 export const getShortData = async (req: Request, res: Response) => {
   const { url } = req.query;
-  const data = getAllData(url);
+  const data = urls.find(d => d.url == url);
   if(data == undefined)
     res.sendStatus(404); // Perhaps wrong to return 404 here... 
   else
-    res.send({url:url, votes: data.vote});
+    res.send({url:url, votes: data.votes});
 };
 
 export const getLongData = async (req: Request, res: Response) => {
   const { url } = req.query;
-  const data = getAllData(url);
+  const data = urls.find(d => d.url == url);
   if(data == undefined)
     res.sendStatus(404); // Perhaps wrong to return 404 here... 
   else
