@@ -2,3 +2,5 @@
 /build
 
 package-lock.json
+
+session-data.json

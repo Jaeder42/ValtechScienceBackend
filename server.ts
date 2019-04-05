@@ -1,11 +1,11 @@
 import express = require('express');
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import bodyParser from 'body-parser';
 import { isVerified, getShortData, getLongData, postFact } from './handlers';
 
 // Create a new express application instance
 const app: express.Application = express();
-
+writeFileSync('./session-data.json', readFileSync('./data.json'));
 app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
