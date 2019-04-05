@@ -16,6 +16,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/verified', isVerified);
+
 app.get('/short/', function(req, res) {
   const url = req.query.url;
   const shortData = getShortData(url);
