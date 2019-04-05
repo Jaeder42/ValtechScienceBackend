@@ -30,7 +30,7 @@ export const postFact = async (req: Request, res: Response) => {
     data.push(urlData);
   }
   urlData.votes[position] += 1;
-  urlData.links[position].push({ url: source, reason, type });
+  urlData.links[position].push({ url: source, reason, type, user });
   await writeFileSync('./utils/session-data.json', JSON.stringify(data));
 
   return res.json({ data });
