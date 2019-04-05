@@ -9,8 +9,7 @@ import {
   postOp
 } from './handlers';
 import cors from 'cors';
-
-// Create a new express application instance
+const PORT = process.env.PORT || 3000;
 const app: express.Application = express();
 writeFileSync('./utils/session-data.json', readFileSync('./utils/data.json'));
 app.use(bodyParser.json());
@@ -29,6 +28,6 @@ app.get('/long/', getLongData);
 app.post('/fact', postFact);
 app.post('/opinion', postOp);
 
-app.listen(3000, function() {
-  console.log('Example app listening on port 3000!');
+app.listen(PORT, function() {
+  console.log(`Example app listening on port ${PORT}!`);
 });
