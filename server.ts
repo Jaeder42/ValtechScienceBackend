@@ -8,11 +8,13 @@ import {
   postFact,
   postOp
 } from './handlers';
+import cors from 'cors';
 
 // Create a new express application instance
 const app: express.Application = express();
 writeFileSync('./utils/session-data.json', readFileSync('./utils/data.json'));
 app.use(bodyParser.json());
+app.use(cors());
 
 app.get('/', function(req, res) {
   res.send('Hello World!');

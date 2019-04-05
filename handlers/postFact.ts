@@ -3,37 +3,43 @@ import { verify } from './isVerified';
 import { readFileSync, writeFileSync } from 'fs';
 
 export const postFact = async (req: Request, res: Response) => {
-  const { position, source, user, url, reason } = req.body;
-  const type = 'FACT';
-  if (!position || !source || !user || !url) {
-    return res.status(400).json({
-      message: 'position, source, user and url are required fields'
-    });
-  }
-  if (!verify(source)) {
-    return res.status(400).json({ message: 'Non-verified source' });
-  }
+  try {
+    const { position, source, user, url, reason } = req.body;
+    const type = 'FACT';
+    if (!position || !source || !user || !url) {
+      return res.status(400).json({
+        message: 'position, source, user and url are required fields'
+      });
+    }
+    if (!verify(source)) {
+      return res.status(400).json({ message: 'Non-verified source' });
+    }
 
-  let data = JSON.parse(
-    await readFileSync('./utils/session-data.json').toString()
-  );
-  let urlData = findData(data, url);
-  if (!urlData) {
-    urlData = {
-      url,
-      votes: { pro: 0, con: 0 },
-      links: {
-        pro: [],
-        con: []
-      }
-    };
-    data.push(urlData);
-  }
-  urlData.votes[position] += 1;
-  urlData.links[position].push({ url: source, reason, type, user });
-  await writeFileSync('./utils/session-data.json', JSON.stringify(data));
+    let data = JSON.parse(
+      await readFileSync('./utils/session-data.json').toString()
+    );
+    let urlData = findData(data, url);
+    if (!urlData) {
+      urlData = {
+        url,
+        votes: { pro: 0, con: 0 },
+        links: {
+          pro: [],
+          con: []
+        }
+      };
+      data.push(urlData);
+    }
+    urlData.votes[position] += 1;
+    urlData.links[position].push({ url: source, reason, type, user });
+    await writeFileSync('./utils/session-data.json', JSON.stringify(data));
 
-  return res.json({ data });
+    return res.json({ data });
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ message: 'unexpected error occured while adding fact' });
+  }
 };
 
 const findData = (data: any, url: string) => {
