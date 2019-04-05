@@ -1,9 +1,15 @@
 import express = require('express');
+import { readFileSync } from 'fs';
 
 // Create a new express application instance
 const app: express.Application = express();
 
-const getShortData = (url:string) =>  ({ url: url, pro: 21, con: 4 });
+const getShortData = (url:string) => {
+  let data = readFileSync('./data.json').toString();
+  var urls = JSON.parse(data);
+  const result = urls[url]; 
+  return ({ url: url, votes : result });
+} 
 
 app.get('/', function(req, res) {
   res.send('Hello World!');
