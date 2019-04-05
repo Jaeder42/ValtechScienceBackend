@@ -29,7 +29,7 @@ export const postOp = async (req: Request, res: Response) => {
       data.push(urlData);
     }
     urlData.votes[position] += 1;
-    urlData.links[position].push({ url: source, reason, type, date });
+    urlData.links[position].push({ url: source, reason, user, type, date });
     await writeFileSync('./utils/session-data.json', JSON.stringify(data));
 
     return res.json({ data });
