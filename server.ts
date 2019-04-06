@@ -1,5 +1,6 @@
 import express = require('express');
 import { readFileSync, writeFileSync } from 'fs';
+import path from 'path';
 import bodyParser from 'body-parser';
 import {
   isVerified,
@@ -14,9 +15,14 @@ const app: express.Application = express();
 // writeFileSync('./utils/session-data.json', readFileSync('./utils/data.json'));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.static(path.join(__dirname, 'web/build')));
 
-app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/index.html');
+// app.get('/', function(req, res) {
+//   res.sendFile(__dirname + 'web/build/index.html');
+// });
+
+app.get('/api', function(req, res) {
+  res.sendFile(__dirname + '/api.html');
 });
 
 app.get('/verified', isVerified);
