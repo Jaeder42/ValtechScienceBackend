@@ -1,6 +1,6 @@
 [
   {
-    "url": "http://www.dn.se",
+    "url": "https://www.dn.se",
     "votes": { "pro": 21, "con": 4 },
     "links": {
       "pro": [
@@ -21,7 +21,7 @@
     }
   },
   {
-    "url": "http://www.svd.se",
+    "url": "https://www.svd.se",
     "votes": { "pro": 42, "con": 12 },
     "links": {
       "pro": [],

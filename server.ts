@@ -11,7 +11,7 @@ import {
 import cors from 'cors';
 const PORT = process.env.PORT || 3000;
 const app: express.Application = express();
-writeFileSync('./utils/session-data.json', readFileSync('./utils/data.json'));
+// writeFileSync('./utils/session-data.json', readFileSync('./utils/data.json'));
 app.use(bodyParser.json());
 app.use(cors());
 
