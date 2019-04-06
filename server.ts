@@ -17,10 +17,6 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'web/build')));
 
-// app.get('/', function(req, res) {
-//   res.sendFile(__dirname + 'web/build/index.html');
-// });
-
 app.get('/api', function(req, res) {
   res.sendFile(__dirname + '/api.html');
 });

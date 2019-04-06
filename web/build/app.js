@@ -89,25 +89,56 @@ var Listing = function (_React$Component) {
               { 'class': 'content-box' },
               _react2.default.createElement(
                 'h1',
-                null,
-                'Trov\xE4rdighet f\xF6r'
+                { 'class': 'page-heading' },
+                'Information about your source'
               ),
               _react2.default.createElement(
                 'div',
                 { 'class': 'grid-x grid-padding-x' },
                 _react2.default.createElement(
                   'div',
-                  { 'class': 'large-6 medium-6 cell' },
+                  { 'class': 'large-12 cell' },
                   _react2.default.createElement(
-                    'p',
-                    null,
-                    this.state.url
+                    'div',
+                    { 'class': 'grid-x summary-container' },
+                    _react2.default.createElement(
+                      'div',
+                      { 'class': 'large-8 medium-6 cell' },
+                      _react2.default.createElement(
+                        'li',
+                        { 'class': 'card borderless' },
+                        _react2.default.createElement(
+                          'div',
+                          { 'class': 'img-wrapper padded' },
+                          _react2.default.createElement('img', { src: 'img/trump-thinking.jpg', 'class': 'img-fit' })
+                        ),
+                        _react2.default.createElement(
+                          'div',
+                          { 'class': 'card-section card-body' },
+                          _react2.default.createElement(
+                            'h3',
+                            { 'class': 'page-sub-heading' },
+                            'Certified Moron Donald Trump Thinks Wind Turbines \u201CCause Cancer\u201D'
+                          ),
+                          _react2.default.createElement(
+                            'p',
+                            null,
+                            'Trump, who once likened wind turbines to the Lockerbie bombing, has a new conspiracy theory.'
+                          ),
+                          _react2.default.createElement(
+                            'a',
+                            { href: 'https://www.vanityfair.com/news/2019/04/donald-trump-wind-power-causes-cancer' },
+                            'https://www.vanityfair.com/news/2019/04/donald-trump-wind-power-causes-cancer'
+                          )
+                        )
+                      )
+                    ),
+                    _react2.default.createElement(
+                      'div',
+                      { 'class': 'large-4 medium-6 cell barometer-container' },
+                      _react2.default.createElement(_barometer2.default, { value: value, votes: this.state.votes })
+                    )
                   )
-                ),
-                _react2.default.createElement(
-                  'div',
-                  { 'class': 'large-6 medium-6 cell' },
-                  _react2.default.createElement(_barometer2.default, { value: value })
                 )
               )
             )
@@ -130,8 +161,8 @@ var Listing = function (_React$Component) {
                   { 'class': 'content-box' },
                   _react2.default.createElement(
                     'h3',
-                    null,
-                    'F\xF6r'
+                    { 'class': 'listing-heading for' },
+                    'For'
                   ),
                   _react2.default.createElement(
                     'ul',
@@ -152,8 +183,8 @@ var Listing = function (_React$Component) {
               { 'class': 'content-box' },
               _react2.default.createElement(
                 'h3',
-                null,
-                'Emot'
+                { 'class': 'listing-heading against' },
+                'Against'
               ),
               _react2.default.createElement(
                 'ul',
@@ -179,7 +210,7 @@ exports.default = Listing;
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -200,50 +231,159 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Gauge = require('./gauge.min.js');
 
 var opts = {
-    angle: -0.25,
-    lineWidth: 0.2,
-    pointer: {
-        length: 0.6,
-        strokeWidth: 0.05,
-        color: "#000000"
-    },
-    staticZones: [{ strokeStyle: "#F03E3E", min: 0, max: 1000 }, { strokeStyle: "#FFDD00", min: 1000, max: 2000 }, { strokeStyle: "#30B32D", min: 2000, max: 3000 }],
-    limitMax: false,
-    limitMin: false,
-    strokeColor: "#E0E0E0",
-    highDpiSupport: true
+  angle: -0.25,
+  lineWidth: 0.2,
+  pointer: {
+    length: 0.6,
+    strokeWidth: 0.05,
+    color: "#000000"
+  },
+  staticZones: [{ strokeStyle: "#F03E3E", min: 0, max: 1000 }, { strokeStyle: "#FFDD00", min: 1000, max: 2000 }, { strokeStyle: "#30B32D", min: 2000, max: 3000 }],
+  limitMax: false,
+  limitMin: false,
+  strokeColor: "#E0E0E0",
+  highDpiSupport: true
 };
 
 var Barometer = function (_React$Component) {
-    _inherits(Barometer, _React$Component);
+  _inherits(Barometer, _React$Component);
 
-    function Barometer() {
-        _classCallCheck(this, Barometer);
+  function Barometer() {
+    _classCallCheck(this, Barometer);
 
-        return _possibleConstructorReturn(this, (Barometer.__proto__ || Object.getPrototypeOf(Barometer)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (Barometer.__proto__ || Object.getPrototypeOf(Barometer)).apply(this, arguments));
+  }
+
+  _createClass(Barometer, [{
+    key: 'componentDidUpdate',
+    value: function componentDidUpdate() {
+      var target = document.getElementById("gauge");
+      var gauge = new Gauge.Gauge(target).setOptions(opts);
+      gauge.maxValue = 3000;
+      gauge.setMinValue(0);
+      gauge.animationSpeed = 30; // 32 default 
+      if (typeof this.props.value == 'number') gauge.set(this.props.value * gauge.maxValue);
     }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (!!this.props.votes) {
+        return _react2.default.createElement(
+          _react2.default.Fragment,
+          null,
+          _react2.default.createElement('canvas', { id: 'gauge', 'class': 'theGauge' }),
+          _react2.default.createElement(
+            'p',
+            { 'class': 'barometer-summary' },
+            'Credible'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            'Results are based on'
+          ),
+          _react2.default.createElement(
+            'div',
+            { 'class': 'grid-x' },
+            _react2.default.createElement(
+              'div',
+              { 'class': 'cell small-6' },
+              _react2.default.createElement(
+                'div',
+                { 'class': 'details-heading-wrapper' },
+                _react2.default.createElement(
+                  'span',
+                  { 'class': 'barometer-summary-details-heading' },
+                  'For'
+                ),
+                _react2.default.createElement(
+                  'span',
+                  { 'class': 'barometer-summary-details-number' },
+                  this.props.votes.pro
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { 'class': 'grid-x' },
+                _react2.default.createElement(
+                  'div',
+                  { 'class': 'cell small-6 barometer-summary-details-type' },
+                  'Fact:'
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { 'class': 'cell small-6' },
+                  this.props.votes.pro - 1
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { 'class': 'grid-x' },
+                _react2.default.createElement(
+                  'div',
+                  { 'class': 'cell small-6 barometer-summary-details-type' },
+                  'Opinion:'
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { 'class': 'cell small-6' },
+                  '1'
+                )
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { 'class': 'cell small-6' },
+              _react2.default.createElement(
+                'div',
+                { 'class': 'details-heading-wrapper' },
+                _react2.default.createElement(
+                  'span',
+                  { 'class': 'barometer-summary-details-heading' },
+                  'Against'
+                ),
+                _react2.default.createElement(
+                  'span',
+                  { 'class': 'barometer-summary-details-number' },
+                  this.props.votes.con
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { 'class': 'grid-x' },
+                _react2.default.createElement(
+                  'div',
+                  { 'class': 'cell small-6 barometer-summary-details-type' },
+                  'Fact:'
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { 'class': 'cell small-6' },
+                  '0'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { 'class': 'grid-x' },
+                _react2.default.createElement(
+                  'div',
+                  { 'class': 'cell small-6 barometer-summary-details-type' },
+                  'Opinion:'
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { 'class': 'cell small-6' },
+                  this.props.votes.con
+                )
+              )
+            )
+          )
+        );
+      }
+    }
+  }]);
 
-    _createClass(Barometer, [{
-        key: 'componentDidUpdate',
-        value: function componentDidUpdate() {
-            var target = document.getElementById("gauge");
-            var gauge = new Gauge.Gauge(target).setOptions(opts);
-            gauge.maxValue = 3000;
-            gauge.setMinValue(0);
-            gauge.animationSpeed = 30; // 32 default 
-            if (typeof this.props.value == 'number') gauge.set(this.props.value * gauge.maxValue);
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-
-            return _react2.default.createElement('canvas', { id: 'gauge', 'class': 'theGauge' })
-            // <p>Barometer: {this.props.value}</p>
-            ;
-        }
-    }]);
-
-    return Barometer;
+  return Barometer;
 }(_react2.default.Component);
 
 exports.default = Barometer;
@@ -310,7 +450,7 @@ var Card = function (_React$Component) {
         _react2.default.createElement(
           "div",
           { "class": "img-wrapper" },
-          _react2.default.createElement("img", { src: "img/trump-thinking.jpg", "class": "img-fit" })
+          _react2.default.createElement("img", { src: "img/trump-opinion.jpg", "class": "img-fit" })
         ),
         _react2.default.createElement(
           "div",
@@ -611,7 +751,6 @@ var Layout = function (_React$Component) {
     key: 'doSearch',
     value: function doSearch(e) {
       e.preventDefault();
-      alert('A name was submitted: ' + this.search.current.value);
       window.location = 'http://localhost:8000/?url=' + this.search.current.value;
     }
   }, {
@@ -639,7 +778,12 @@ var Layout = function (_React$Component) {
                   _react2.default.createElement(
                     'form',
                     { onSubmit: this.doSearch, className: 'search-container' },
-                    _react2.default.createElement('input', { type: 'text', ref: this.search, className: 'search-input', placeholder: 'S\xF6k' })
+                    _react2.default.createElement('input', {
+                      type: 'text',
+                      ref: this.search,
+                      className: 'search-input',
+                      placeholder: 'S\xF6k'
+                    })
                   )
                 )
               )

@@ -2,4 +2,4 @@
 /build
 
 package-lock.json
-utils/session-data.json
+session-data.json
